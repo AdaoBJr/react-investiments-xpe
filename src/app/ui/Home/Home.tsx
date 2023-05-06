@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Stack } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
 import { useHome } from 'services/talons';
 import { Title, Animation, Text, Dropdown, BodyInvestiments } from 'app/shared';
@@ -7,13 +7,13 @@ import { Title, Animation, Text, Dropdown, BodyInvestiments } from 'app/shared';
 export const Home: React.FC = () => {
   const {
     data,
-    compProps: { animation, title, label, dropdown, button },
+    compProps: { loadingAnimation, homeAnimation, title, label, dropdown, button },
   } = useHome();
 
   if (!data)
     return (
       <BodyInvestiments>
-        <Animation {...animation} />
+        <Animation {...loadingAnimation} />
       </BodyInvestiments>
     );
 
@@ -21,10 +21,15 @@ export const Home: React.FC = () => {
     <BodyInvestiments>
       <Title {...title} />
       <Text {...label} />
-      <Stack flexDirection={'row'} columnGap={1}>
-        <Dropdown {...dropdown} />
-        <Button {...button} />
-      </Stack>
+      <Animation {...homeAnimation} />
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={6}>
+          <Dropdown {...dropdown} />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Button {...button} />
+        </Grid>
+      </Grid>
     </BodyInvestiments>
   );
 };

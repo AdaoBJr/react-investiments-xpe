@@ -3,7 +3,8 @@ import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { home } from 'articles';
 import { GetInvestments } from 'types/domain';
 import { useInvestimentsApi } from 'services/infra';
-import loading from 'assets/animations/loading.json';
+import homeAnimation from 'assets/animations/home.json';
+import loadingAnimation from 'assets/animations/loading.json';
 import {
   AnimationProps,
   TitleProps,
@@ -38,9 +39,15 @@ export const useHome = () => {
 
   const compProps = useMemo(
     () => ({
-      animation: {
-        animation: loading,
+      loadingAnimation: {
+        animation: loadingAnimation,
         alt: 'animação-loading',
+        center: true,
+        width: '300px',
+      } as AnimationProps,
+      homeAnimation: {
+        animation: homeAnimation,
+        alt: 'animação-home',
         center: true,
         width: '300px',
       } as AnimationProps,
@@ -74,7 +81,7 @@ export const useHome = () => {
         },
       } as ButtonProps,
     }),
-    [dropItems]
+    [dropItems, dropdownValue]
   );
 
   useEffect(() => {
