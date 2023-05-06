@@ -6,7 +6,7 @@ export const BoxContainer: SxProps<Theme> = {
   alignItems: 'center',
   columnGap: 1,
   px: { xs: 1, md: 1.5 },
-  backgroundColor: 'primary.contrastText',
+  backgroundColor: 'background.paper',
   height: { xs: '56px', sm: '76px' },
   width: '100%',
   boxShadow: 2,

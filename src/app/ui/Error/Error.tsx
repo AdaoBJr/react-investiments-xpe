@@ -3,7 +3,7 @@ import { Grid, Paper } from '@mui/material';
 import { Animation, Title } from 'app/shared';
 
 import { useError } from 'services/talons';
-import { GridContainer, PaperWrapper } from './styles';
+import { GridContainer, PaperWrapper } from 'app/shared';
 
 export const Error: React.FC = () => {
   const {
