@@ -1,42 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, Paper } from '@mui/material';
+import React from 'react';
+import { Button, Stack } from '@mui/material';
 
-import { GetInvestments } from 'types';
 import { useHome } from 'services/talons';
-import { useInvestimentsApi } from 'services/infra';
-import { Animation, GridContainer, PaperWrapper, Title } from 'app/shared';
+import { Title, Animation, Text, Dropdown, BodyInvestiments } from 'app/shared';
 
 export const Home: React.FC = () => {
-  const { getInvestiments } = useInvestimentsApi();
   const {
-    homeProps: { animationProps, titleProps, labelProps },
+    data,
+    compProps: { animation, title, label, dropdown, button },
   } = useHome();
 
-  const [data, setData] = useState<GetInvestments | null>(null);
-
-  const getInvest = async () => {
-    const data = await getInvestiments();
-    setData(data);
-  };
-
-  useEffect(() => {
-    getInvest();
-  }, []);
+  if (!data)
+    return (
+      <BodyInvestiments>
+        <Animation {...animation} />
+      </BodyInvestiments>
+    );
 
   return (
-    <Grid container sx={GridContainer}>
-      <Grid item xs={12}>
-        <Paper sx={PaperWrapper}>
-          {!data ? (
-            <Animation {...animationProps} />
-          ) : (
-            <>
-              <Title {...titleProps} />
-              <Title {...labelProps} />
-            </>
-          )}
-        </Paper>
-      </Grid>
-    </Grid>
+    <BodyInvestiments>
+      <Title {...title} />
+      <Text {...label} />
+      <Stack flexDirection={'row'} columnGap={1}>
+        <Dropdown {...dropdown} />
+        <Button {...button} />
+      </Stack>
+    </BodyInvestiments>
   );
 };
