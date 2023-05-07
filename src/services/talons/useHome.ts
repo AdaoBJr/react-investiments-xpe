@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { home } from 'articles';
 import { GetInvestments } from 'types/domain';
@@ -15,10 +16,11 @@ import {
 import { ButtonProps } from '@mui/material';
 
 export const useHome = () => {
+  const navigate = useNavigate();
   const { getInvestiments } = useInvestimentsApi();
 
   const [data, setData] = useState<GetInvestments | null>(null);
-  const [dropdownValue, setDropdownValue] = useState<string | null>(null);
+  const [dropdownValue, setDropdownValue] = useState<string>('');
 
   const getInvest = async () => {
     const data = await getInvestiments();
@@ -27,6 +29,8 @@ export const useHome = () => {
 
   const handleSelectOnBlur = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
     setDropdownValue(value);
+
+  const handleRedirect = () => navigate(`/investment/${dropdownValue}`, { state: data });
 
   const dropItems: DropdownItems[] | undefined = useMemo(
     () =>
@@ -64,6 +68,7 @@ export const useHome = () => {
       } as TextProps,
       dropdown: {
         name: 'dropdown_investiments',
+        defaultValue: '',
         label: !dropdownValue && home.placeholder,
         fullWidth: true,
         options: dropItems,
@@ -72,9 +77,10 @@ export const useHome = () => {
       button: {
         children: home.button,
         fullWidth: true,
+        disabled: !dropdownValue,
+        onClick: handleRedirect,
         sx: {
           maxHeight: '40px',
-
           color: 'common.white',
           fontWeight: 700,
           fontSize: '1rem',
