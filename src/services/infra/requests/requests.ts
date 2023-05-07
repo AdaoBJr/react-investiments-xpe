@@ -1,6 +1,6 @@
-import { GetInvestments } from 'types';
 import { api } from '../api';
 import { getEnv } from 'environment';
+import { GetInvestments } from 'types/domain';
 
 export const useInvestimentsApi = () => {
   const { URL_BASE } = getEnv();

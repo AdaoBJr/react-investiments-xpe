@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { CardMedia } from '@mui/material';
-import { ImageProps } from '@sn-contrato/lui-components';
+
+import { ImageProps } from './types';
 
 export const Image: React.FC<ImageProps> = memo((props) => {
   return (
