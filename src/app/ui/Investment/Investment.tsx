@@ -8,33 +8,42 @@ import { useInvestment } from 'services/talons';
 
 export const Investment: React.FC = () => {
   const {
-    compProps: { title },
+    investments,
+    compProps: { title, subTitle, totalRevenue },
   } = useInvestment();
-
-  const render = [
-    { month: 'jan/2020', value: 1000, revenue: '11%' },
-    { month: 'fev/2020', value: 2000, revenue: '10%' },
-    { month: 'mar/2020', value: -500, revenue: '-8%' },
-  ];
 
   return (
     <BodyInvestiment>
       <Box>
         <Title {...title} />
+        <Stack flexDirection={'row'} justifyContent={'center'} mt={0.5} columnGap={0.5}>
+          <Title {...subTitle} />
+          <Title {...totalRevenue} />
+        </Stack>
         <Box mt={1}>
           <Divider sx={SxDividerUi} />
         </Box>
       </Box>
-      {render.map((item, i) => (
-        <Box key={item.month}>
+      {investments.map((item, i) => (
+        <Box key={item.date}>
           <Stack flexDirection={'row'} justifyContent={'space-between'}>
-            <Stack flexDirection={'row'} columnGap={1}>
-              <Text children={item.month} fontWeight={800} />
-              <Text children={item.value} fontWeight={600} />
+            <Stack flexDirection={'row'} alignItems={'center'} columnGap={3.75}>
+              <Text children={item.date} fontWeight={800} width={'70px'} />
+              <Text
+                children={`R$ ${item.value}`}
+                fontWeight={700}
+                fontSize={'1rem'}
+                color={item.isNegative ? 'error.main' : 'success.main'}
+              />
             </Stack>
-            <Text children={item.revenue} fontWeight={600} />
+            <Text
+              children={item.revenue}
+              fontWeight={700}
+              fontSize={'1rem'}
+              color={item.isNegative ? 'error.main' : 'success.main'}
+            />
           </Stack>
-          {render.length - 1 !== i && (
+          {investments.length - 1 !== i && (
             <Box mt={0.35}>
               <Divider sx={SxDividerUi} />
             </Box>
