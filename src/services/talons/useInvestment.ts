@@ -2,8 +2,9 @@ import { useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import * as dayjs from 'dayjs';
 
-import { GetInvestments } from 'types/domain';
+import { invest } from 'articles';
 import { TitleProps } from 'types/shared';
+import { GetInvestments } from 'types/domain';
 
 interface LocationState {
   state: GetInvestments;
@@ -54,6 +55,7 @@ export const useInvestment = () => {
     const totalRevenue = investments
       .reduce((acc, curr) => acc + parseInt(curr.revenue), 0)
       .toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
     const totalValue = (
       parseFloat(investments[11].value.replace('.', '').replace(',', '.')) -
       parseFloat(investments[0].value.replace('.', '').replace(',', '.'))
@@ -76,7 +78,7 @@ export const useInvestment = () => {
         textAlign: 'center',
       } as TitleProps,
       subTitle: {
-        children: 'Rendimento total:',
+        children: invest.subTitle,
         variant: 'h2',
         textAlign: 'center',
       } as TitleProps,
