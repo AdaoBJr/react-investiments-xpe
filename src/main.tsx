@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 
 import { theme } from 'theme';
@@ -12,9 +12,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <ThemeProvider theme={theme}>
       <Box sx={BoxContainer}>
         <CssBaseline />
-        <HashRouter>
+        <Router>
           <App />
-        </HashRouter>
+        </Router>
       </Box>
     </ThemeProvider>
   </React.StrictMode>
