@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Grid } from '@mui/material';
 
+import { BodyHome } from './components';
 import { useHome } from 'services/talons';
-import { Title, Animation, Text, Dropdown, BodyInvestiments } from 'app/shared';
+import { Title, Animation, Text, Dropdown } from 'app/shared';
 
 export const Home: React.FC = () => {
   const {
@@ -12,13 +13,13 @@ export const Home: React.FC = () => {
 
   if (!data)
     return (
-      <BodyInvestiments>
+      <BodyHome>
         <Animation {...loadingAnimation} />
-      </BodyInvestiments>
+      </BodyHome>
     );
 
   return (
-    <BodyInvestiments>
+    <BodyHome>
       <Title {...title} />
       <Text {...label} />
       <Animation {...homeAnimation} />
@@ -30,6 +31,6 @@ export const Home: React.FC = () => {
           <Button {...button} />
         </Grid>
       </Grid>
-    </BodyInvestiments>
+    </BodyHome>
   );
 };
