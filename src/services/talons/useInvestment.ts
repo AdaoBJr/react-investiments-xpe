@@ -14,6 +14,11 @@ interface ParamId {
   [id: string]: string;
 }
 
+const fixedDigits = {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+};
+
 export const useInvestment = () => {
   const param = useParams<ParamId>();
   const location = useLocation() as LocationState;
@@ -37,14 +42,11 @@ export const useInvestment = () => {
             ? 0
             : (((value - array[i - 1].value) / array[i - 1].value) * 100).toPrecision(3)
         }`
-      ).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      ).toLocaleString('pt-BR', fixedDigits);
 
       return {
         date: dayjs(`${year}-${month}-01`).format('MMM/YYYY'),
-        value: `${value.toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}`,
+        value: `${value.toLocaleString('pt-BR', fixedDigits)}`,
         revenue: parseInt(calcRevenue) <= 0 ? calcRevenue : `+${calcRevenue}`,
         isNegative: parseInt(calcRevenue) < 0,
       };
@@ -52,14 +54,15 @@ export const useInvestment = () => {
   }, [location.state, param.id]);
 
   const totals = useMemo(() => {
-    const totalRevenue = investments
-      .reduce((acc, curr) => acc + parseInt(curr.revenue), 0)
-      .toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    const valueDez = parseFloat(investments[11].value.replace('.', '').replace(',', '.'));
+    const valueJan = parseFloat(investments[0].value.replace('.', '').replace(',', '.'));
 
-    const totalValue = (
-      parseFloat(investments[11].value.replace('.', '').replace(',', '.')) -
-      parseFloat(investments[0].value.replace('.', '').replace(',', '.'))
-    ).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    const totalRevenue = (((valueDez - valueJan) / valueJan) * 100).toLocaleString(
+      'pt-BR',
+      fixedDigits
+    );
+
+    const totalValue = (valueDez - valueJan).toLocaleString('pt-BR', fixedDigits);
 
     const totalRevenueFormatted =
       parseInt(totalRevenue) <= 0 ? totalRevenue : `+${totalRevenue}`;
