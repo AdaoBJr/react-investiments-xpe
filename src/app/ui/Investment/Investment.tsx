@@ -26,7 +26,11 @@ export const Investment: React.FC = () => {
       </Box>
       {investments.map((item, i) => (
         <Box key={item.date}>
-          <Stack flexDirection={'row'} justifyContent={'space-between'}>
+          <Stack
+            flexDirection={'row'}
+            justifyContent={'space-between'}
+            alignItems={'center'}
+          >
             <Stack flexDirection={'row'} alignItems={'center'} columnGap={3.75}>
               <Text children={item.date} fontWeight={800} width={'70px'} />
               <Text
