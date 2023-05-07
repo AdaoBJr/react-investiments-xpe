@@ -35,6 +35,20 @@ export const theme = createTheme(
         light: '#C7C294',
         dark: '#8D875F',
       },
+      grey: {
+        '50': '#F2F2F2',
+        '100': '#E6E6E6',
+        '200': '#D6D6D6',
+        '300': '#C2C2C2',
+        '400': '#ABABAB',
+        '500': '#919191',
+        '600': '#808080',
+        '700': '#6E6E6E',
+        '800': '#5E5E5E',
+        '900': '#4A4A4A',
+        A100: '#383838',
+        A200: '#262626',
+      },
       text: {
         primary: '#262626',
         secondary: '#4A4A4A',
@@ -71,21 +85,6 @@ export const theme = createTheme(
         color: '#4A4A4A',
         fontSize: '1.5rem',
         fontWeight: 700,
-      },
-      h2: {
-        color: '#4A4A4A',
-        fontSize: '1rem',
-        fontWeight: 600,
-      },
-      h3: {
-        color: '#4A4A4A',
-        fontSize: '.875rem',
-        fontWeight: 600,
-      },
-      h4: {
-        color: '#4A4A4A',
-        fontSize: '.75rem',
-        fontWeight: 500,
       },
       body1: {
         color: '#4A4A4A',
